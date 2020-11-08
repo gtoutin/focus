@@ -1,4 +1,4 @@
-FROM caffe2ai/caffe2
+FROM bvlc/caffe
 
 COPY /app /app
 WORKDIR /app
