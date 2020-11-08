@@ -1,0 +1,11 @@
+# Caffe 2 docker-compose
+---
+version: "3"
+services:
+  caffe:
+    build:
+      context: ./
+    command: python app.py
+    volumes:
+    - ./app:/app
+    container_name: caffe
