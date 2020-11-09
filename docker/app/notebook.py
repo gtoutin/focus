@@ -19,6 +19,7 @@ import numpy as np
 # %matplotlib inline
 
 cur_net_dir = 'VGG_S_rgb'
+DEMO_DIR = './demodir/DemoDir'
 
 mean_filename=os.path.join(DEMO_DIR,cur_net_dir,'mean.binaryproto')
 proto_data = open(mean_filename, "rb").read()
@@ -38,7 +39,6 @@ VGG_S_Net = caffe.Classifier(net_model_file, net_pretrained,
 #plt.rcParams['image.interpolation'] = 'nearest'
 #plt.rcParams['image.cmap'] = 'gray'
 
-DEMO_DIR = './demodir/DemoDir'
 
 categories = [ 'Angry' , 'Disgust' , 'Fear' , 'Happy'  , 'Neutral' ,  'Sad' , 'Surprise']
 
@@ -74,3 +74,4 @@ def whatsthatface(imagepath="josie.JPG"):
 
 	return categories[prediction.argmax()],max(max(prediction))
 
+whatsthatface()
