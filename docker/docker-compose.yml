@@ -5,7 +5,7 @@ services:
   caffe:
     build:
       context: ./
-    command: python3 notebook.py
+    command: python3 main.py
     env_file:
     - /home/gctoutin/twitter.env
     volumes:
