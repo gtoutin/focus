@@ -51,7 +51,9 @@ class MentionStream(TwythonStreamer):
       print("It's a mention!")
 
       #save the information into photo
-      photo = "image1.png" 
+      photo = data['entities']['media'][0]['media_url'] #"image1.png" 
+      photo = photo.split('/')
+      photo = photo[-1]
       
       if( 'media' not in data['entities'].keys()):
           m= "tweet me an image:)"
@@ -74,12 +76,13 @@ class MentionStream(TwythonStreamer):
             handle.write(block) 
 
         #response = twitter.upload_media(media=photo)
-    category, prob = whatsthatface("image1.png")
-    m= category + "with probability "+ str(prob*100) + "%"
+    category, prob = whatsthatface(photo)
+    m= category + " with probability "+ str(prob*100) + "%"
+    print(m)
     particle.reply(botapi, username, tweetid, m)
 
       #after tweeting the image we need to reset photo and delete the previous image
-      os.remove(photo)
+    os.remove(photo)
   
   def on_error(self, status_code, data):
     print(status_code)
@@ -89,6 +92,8 @@ class MentionStream(TwythonStreamer):
 
 # Streaming bot
 MetalDetector = MentionStream(cons_key, cons_secret, access_token, access_secret)
+print("***** "*30)
+print("You have entered AI MODE. COMMENCE TWEETING.")
 
 while True:
   try:
