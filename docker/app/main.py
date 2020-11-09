@@ -76,9 +76,7 @@ class MentionStream(TwythonStreamer):
             handle.write(block) 
 
         #response = twitter.upload_media(media=photo)
-    category, prob = whatsthatface(photo)
-    m= category + " with probability "+ str(prob*100) + "%"
-    print(m)
+    m = whatsthatface(photo)
     particle.reply(botapi, username, tweetid, m)
 
       #after tweeting the image we need to reset photo and delete the previous image
@@ -99,7 +97,7 @@ while True:
   try:
       MetalDetector.statuses.filter(track=BOTNAME)
   except Exception:
-    print("error oh no!:(")
+    print("Error! Image probably has too many faces.")
 
       # this instance will dm me if the bot has an error
     errorbot = Twython(cons_key, cons_secret, access_token, access_secret)

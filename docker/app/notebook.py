@@ -25,6 +25,14 @@ mean_filename=os.path.join(DEMO_DIR,cur_net_dir,'mean.binaryproto')
 proto_data = open(mean_filename, "rb").read()
 a = caffe.io.caffe_pb2.BlobProto.FromString(proto_data)
 mean  = caffe.io.blobproto_to_array(a)[0]
+
+
+
+# Load the cascade
+face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+
+
+
 	
 net_pretrained = os.path.join(DEMO_DIR,cur_net_dir,'EmotiW_VGG_S.caffemodel')
 net_model_file = os.path.join(DEMO_DIR,cur_net_dir,'deploy.prototxt')
@@ -66,11 +74,38 @@ def vis_square(data, padsize=1, padval=0):
 
 def whatsthatface(imagepath="josie.JPG"):
 	'''Identify an individual face given the name of an image. Returns category and probability'''
-		
-	input_image = caffe.io.load_image(imagepath)
-	prediction = VGG_S_Net.predict([input_image],oversample=False)
-#	print(prediction)
-	print('predicted category is {0}'.format(categories[prediction.argmax()])+' with probability '+str(max(max(prediction)*100))+'%')
+	results = []
 
-	return categories[prediction.argmax()],max(max(prediction))
+	# Read the input image
+	img = cv2.imread(imagepath)
+
+
+	# Convert into grayscale
+	gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+	# Detect faces
+	faces = face_cascade.detectMultiScale(gray, 1.1, 4)
+	
+
+	count = 0
+
+	# Draw rectangle around the faces
+	for (x, y, w, h) in faces:
+		count = count+1
+		frame = img[y:y+h, x:x+h]
+		
+		cv2.imwrite("temp"+str(count)+".jpg", frame)
+
+		input_image = caffe.io.load_image("temp"+str(count)+".jpg")
+		prediction = VGG_S_Net.predict([input_image],oversample=False)
+		print(prediction)
+		results.append('{0}'.format(categories[prediction.argmax()]))
+
+	if len(results)==0:
+		input_image = caffe.io.load_image(imagepath)
+		prediction = VGG_S_Net.predict([input_image],oversample=False)
+		print(prediction)
+		results.append('{0}'.format(categories[prediction.argmax()]))
+
+
+	return '\n'.join(results)
 
