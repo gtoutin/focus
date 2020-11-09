@@ -42,3 +42,11 @@ docker-compose up
 2. Upload an image to the tweet
 
 The bot will respond to the tweet classifying an emotion per face.
+
+
+## Future work
+
+- Find image above tagged tweet (easy)
+- Analyze a video (intermediate)
+- Swap out API keys (easy)
+- Permanently house on server (easy)
