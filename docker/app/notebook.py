@@ -67,11 +67,10 @@ def vis_square(data, padsize=1, padval=0):
 def whatsthatface(imagepath="josie.JPG"):
 	'''Identify an individual face given the name of an image. Returns category and probability'''
 		
-	input_image = caffe.io.load_image(os.path.join(DEMO_DIR,cur_net_dir,imagepath))
+	input_image = caffe.io.load_image(imagepath)
 	prediction = VGG_S_Net.predict([input_image],oversample=False)
 #	print(prediction)
 	print('predicted category is {0}'.format(categories[prediction.argmax()])+' with probability '+str(max(max(prediction)*100))+'%')
 
 	return categories[prediction.argmax()],max(max(prediction))
 
-whatsthatface()
