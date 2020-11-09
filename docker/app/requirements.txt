@@ -1,2 +1,5 @@
+opencv-python
 numpy
 matplotlib
+setuptools
+twython

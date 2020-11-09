@@ -5,7 +5,10 @@ services:
   caffe:
     build:
       context: ./
-    command: python app.py
+    command: python3 notebook.py
+    env_file:
+    - /home/gctoutin/twitter.env
     volumes:
     - ./app:/app
+    - /home/gctoutin/demodir:/app/demodir
     container_name: caffe

@@ -9,7 +9,7 @@
 ## THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-import keep_alive
+#import keep_alive
 from twython import TwythonStreamer
 from twython import Twython
 import os
@@ -21,11 +21,10 @@ BOTNAME = "guitar_budgie"   # bot's twitter handle
 OWNERNAME = "TheGuy13055669" # bot's owners' twitter handle
 
 #in the following variables paste your own API keys
-cons_key= 
-cons_secret= 
-access_token= 
-access_secret=
-
+cons_key=os.environ.get('CONS_KEY')
+cons_secret=os.environ.get('CONS_SECRET')
+access_token=os.environ.get('ACCESS_TOKEN')
+access_secret=os.environ.get('ACCESS_SECRET')
 class MentionStream(TwythonStreamer):
     
   def on_success(self, data):
@@ -83,7 +82,7 @@ class MentionStream(TwythonStreamer):
     print(status_code)
 
 # Keep the bot up!
-keep_alive.keep_alive()   
+#keep_alive.keep_alive()   
 
 # Streaming bot
 MetalDetector = MentionStream(cons_key, cons_secret, access_token, access_secret)

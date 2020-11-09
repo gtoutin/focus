@@ -7,29 +7,31 @@ Original file is located at
     https://colab.research.google.com/drive/1qBb-0HpJq9ozK10aq5ByWzH9pMESkvP4
 """
 
-!apt install caffe-cpu
+#!apt install caffe-cpu
 
 # Commented out IPython magic to ensure Python compatibility.
+import cv2
+from PIL import Image
 import caffe
 import os
 import numpy as np
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 # %matplotlib inline
 
 
-plt.rcParams['figure.figsize'] = (10, 10)
-plt.rcParams['image.interpolation'] = 'nearest'
-plt.rcParams['image.cmap'] = 'gray'
+#plt.rcParams['figure.figsize'] = (10, 10)
+#plt.rcParams['image.interpolation'] = 'nearest'
+#plt.rcParams['image.cmap'] = 'gray'
 
-DEMO_DIR = './drive/My Drive/DemoDir'
+DEMO_DIR = './demodir/DemoDir'
 
 categories = [ 'Angry' , 'Disgust' , 'Fear' , 'Happy'  , 'Neutral' ,  'Sad' , 'Surprise']
 
 def showimage(im):
     if im.ndim == 3:
         im = im[:, :, ::-1]
-    plt.set_cmap('jet')
-    plt.imshow(im,vmin=0, vmax=0.2)
+#    plt.set_cmap('jet')
+#    plt.imshow(im,vmin=0, vmax=0.2)
     
 
 def vis_square(data, padsize=1, padval=0):
@@ -45,7 +47,7 @@ def vis_square(data, padsize=1, padval=0):
     data = data.reshape((n, n) + data.shape[1:]).transpose((0, 2, 1, 3) + tuple(range(4, data.ndim + 1)))
     data = data.reshape((n * data.shape[1], n * data.shape[3]) + data.shape[4:])
     
-    showimage(data)
+    #showimage(data)
 
 cur_net_dir = 'VGG_S_rgb'
 
@@ -60,8 +62,10 @@ VGG_S_Net = caffe.Classifier(net_model_file, net_pretrained,
                        mean=mean,
                        channel_swap=(2,1,0),
                        raw_scale=255,
-                       image_dims=(256, 256))
+                       image_dims=((256, 256))
+)
 
-input_image = caffe.io.load_image(os.path.join(DEMO_DIR,cur_net_dir,'demo_image.png'))
+
+input_image = caffe.io.load_image(os.path.join(DEMO_DIR,cur_net_dir,'image19.JPG'))
 prediction = VGG_S_Net.predict([input_image],oversample=False)
 print('predicted category is {0}'.format(categories[prediction.argmax()]))
