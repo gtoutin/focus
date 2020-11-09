@@ -26,8 +26,7 @@ cons_key=os.environ.get('CONS_KEY')
 cons_secret=os.environ.get('CONS_SECRET')
 access_token=os.environ.get('ACCESS_TOKEN')
 access_secret=os.environ.get('ACCESS_SECRET')
-print("***** "*30)
-print(cons_key, cons_secret, access_token, access_secret)
+
 class MentionStream(TwythonStreamer):
     
   def on_success(self, data):
@@ -52,7 +51,7 @@ class MentionStream(TwythonStreamer):
       print("It's a mention!")
 
       #save the information into photo
-      photo = "images/image1.jpg" 
+      photo = "image1.png" 
       
       if( 'media' not in data['entities'].keys()):
           m= "tweet me an image:)"
@@ -75,8 +74,9 @@ class MentionStream(TwythonStreamer):
             handle.write(block) 
 
         #response = twitter.upload_media(media=photo)
-        m= "cool image(?)!"
-        particle.reply(botapi, username, tweetid, m)
+	category, prob = whatsthatface("image1.png")
+	m= category + "with probability "+ str(prob*100) + "%"
+	particle.reply(botapi, username, tweetid, m)
 
       #after tweeting the image we need to reset photo and delete the previous image
       os.remove(photo)
