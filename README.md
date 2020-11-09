@@ -17,7 +17,7 @@ The end goal is to use this project to help move towards a more equal and just s
 
 ## How to setup the bot
 
-- Need an env file for twitter credentials:
+- Create an env file for twitter credentials with the format:
 
 ```
 CONS_KEY=your_key
@@ -26,11 +26,11 @@ ACCESS_TOKEN=your_access_token
 ACCESS_SECRET=your_access_secret
 ```
 
-Also need DemoDir files (model files) https://drive.google.com/file/d/0BydFau0VP3XSYk9ZVnVNd0ZvVk0/view 
+- Download the DemoDir files (model files) https://drive.google.com/file/d/0BydFau0VP3XSYk9ZVnVNd0ZvVk0/view 
 
-- modify docker-compose mount to mount the demodir
+- Modify the docker-compose mount to mount the demodir
 
-Can start the server from within the docker directory with:
+- Start the server from within the docker directory and run with:
 
 ```
 docker-compose up
@@ -49,4 +49,4 @@ The bot will respond to the tweet classifying an emotion per face.
 - Find image above tagged tweet (easy)
 - Analyze a video (intermediate)
 - Swap out API keys (easy)
-- Permanently house on server (easy)
+- Permanently house on a server (easy)
