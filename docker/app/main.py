@@ -74,9 +74,9 @@ class MentionStream(TwythonStreamer):
             handle.write(block) 
 
         #response = twitter.upload_media(media=photo)
-	category, prob = whatsthatface("image1.png")
-	m= category + "with probability "+ str(prob*100) + "%"
-	particle.reply(botapi, username, tweetid, m)
+    category, prob = whatsthatface("image1.png")
+    m= category + "with probability "+ str(prob*100) + "%"
+    particle.reply(botapi, username, tweetid, m)
 
       #after tweeting the image we need to reset photo and delete the previous image
       os.remove(photo)
