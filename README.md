@@ -50,3 +50,12 @@ The bot will respond to the tweet classifying an emotion per face.
 - Analyze a video (intermediate)
 - Swap out API keys (easy)
 - Permanently house on a server (easy)
+
+## Bibliography
+
+Gil Levi and Tal Hassner. Emotion Recognition in the Wild via Convolutional Neural Networks and Mapped Binary Patterns. Proc. ACM International Conference on Multimodal Interaction (ICMI), Seattle, 2015.
+https://talhassner.github.io/home/publication/2015_ICMI
+
+Adarsh Menon
+https://towardsdatascience.com/face-detection-in-2-minutes-using-opencv-python-90f89d7c0f81
+https://github.com/adarsh1021/facedetection
